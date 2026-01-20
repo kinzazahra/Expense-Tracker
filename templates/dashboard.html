@@ -1,0 +1,126 @@
+<!-- dashboard.html - Enhanced Version -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💰 Expense Tracker Pro</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <h2><i class="fas fa-wallet icon"></i> Expense Tracker Pro</h2>
+        <p style="color: var(--gray-500); margin-top: 4px;">Track your income and expenses effortlessly</p>
+      </div>
+      <a href="/logout" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+
+    <!-- Month Selector -->
+    <div class="month-selector">
+      <label for="month"><i class="fas fa-calendar-alt"></i> Select Month</label>
+      <input type="month" id="month" class="month-input">
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-value income" id="total-income">₹0</div>
+        <div class="stat-label">Total Income</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value expense" id="total-expense">₹0</div>
+        <div class="stat-label">Total Expense</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="balance">₹0</div>
+        <div class="stat-label">Balance</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="expense-ratio">0%</div>
+        <div class="stat-label">Expense Ratio</div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Income Section -->
+      <div class="card">
+        <h3 class="section-title"><i class="fas fa-money-bill-wave" style="color: var(--secondary);"></i> Add Income</h3>
+        <div class="input-group">
+          <label for="incomeTitle">Income Source</label>
+          <input id="incomeTitle" placeholder="e.g., Salary, Freelance, Investment">
+        </div>
+        <div class="input-group">
+          <label for="incomeAmount">Amount (₹)</label>
+          <input id="incomeAmount" type="number" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <button class="btn btn-success" onclick="addIncome()">
+          <i class="fas fa-plus-circle"></i> Add Income
+        </button>
+      </div>
+
+      <!-- Expense Section -->
+      <div class="card">
+        <h3 class="section-title"><i class="fas fa-shopping-cart" style="color: var(--danger);"></i> Add Expense</h3>
+        <div class="input-group">
+          <label for="expenseTitle">Expense Title</label>
+          <input id="expenseTitle" placeholder="e.g., Groceries, Dinner, Movie">
+        </div>
+        <div class="input-group">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="Food">🍔 Food & Dining</option>
+            <option value="Travel">✈️ Travel</option>
+            <option value="Rent">🏠 Rent & Utilities</option>
+            <option value="Shopping">🛍️ Shopping</option>
+            <option value="Entertainment">🎬 Entertainment</option>
+            <option value="Healthcare">🏥 Healthcare</option>
+            <option value="Education">📚 Education</option>
+            <option value="Other">📦 Other</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="expenseAmount">Amount (₹)</label>
+          <input id="expenseAmount" type="number" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <button class="btn btn-primary" onclick="addExpense()">
+          <i class="fas fa-minus-circle"></i> Add Expense
+        </button>
+      </div>
+    </div>
+
+    <!-- Transactions List -->
+    <div class="transactions-container">
+      <h3 class="section-title"><i class="fas fa-receipt"></i> Recent Transactions</h3>
+      <div id="list" class="transactions-list"></div>
+    </div>
+
+    <!-- Charts -->
+    <div id="charts" class="hidden">
+      <div class="charts-container">
+        <div class="chart-card">
+          <h4 class="chart-title"><i class="fas fa-chart-pie"></i> Expense Distribution</h4>
+          <div class="chart-wrapper">
+            <canvas id="pie"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h4 class="chart-title"><i class="fas fa-chart-bar"></i> Income vs Expense</h4>
+          <div class="chart-wrapper">
+            <canvas id="bar"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
